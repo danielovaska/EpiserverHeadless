@@ -5,6 +5,10 @@ using EPiServer.ServiceLocation;
 using EpiserverAngular.Business.Rendering;
 using EPiServer.Web.Mvc;
 using EPiServer.Web.Mvc.Html;
+using EPiServer.ContentApi.Infrastructure;
+using EPiServer.ContentApi.Search.Infrastructure;
+using Newtonsoft.Json;
+using System.Web.Http;
 
 namespace EpiserverAngular.Business.Initialization
 {
@@ -21,11 +25,23 @@ namespace EpiserverAngular.Business.Initialization
                 context.Services.AddTransient<IContentRenderer, ErrorHandlingContentRenderer>()
                     .AddTransient<ContentAreaRenderer, AlloyContentAreaRenderer>();
             };
+            context.InitializeContentApi();
+            context.InitializeContentSearchApi();
+            GlobalConfiguration.Configure(config =>
+            {
+                config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
+                config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings();
+                config.Formatters.XmlFormatter.UseXmlSerializer = true;
+                config.DependencyResolver = new StructureMapResolver(context.StructureMap());
+                config.MapHttpAttributeRoutes();
+                config.EnableCors();
+            });
         }
 
         public void Initialize(InitializationEngine context)
         {
             DependencyResolver.SetResolver(new ServiceLocatorDependencyResolver(context.Locate.Advanced));
+            
         }
 
         public void Uninitialize(InitializationEngine context)
