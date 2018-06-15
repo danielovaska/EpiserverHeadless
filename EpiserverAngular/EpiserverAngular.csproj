@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -27,6 +28,7 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -321,6 +323,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ItemGroup>
@@ -412,7 +415,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="my-pages-app\e2e\src\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="my-pages-app\e2e\src\app.po.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\app\app.component.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\app\app.module.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\environments\environment.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\main.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\polyfills.ts" />
+    <TypeScriptCompile Include="my-pages-app\src\test.ts" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="ClientResources\Images\icons\layoutIcons24x24.png" />
     <Content Include="ClientResources\Scripts\Editors\StringList.js" />
@@ -421,6 +435,13 @@
     <Content Include="favicon.ico" />
     <Content Include="lang\EPiServer.ContentApi.Authorization.UI_en.xml" />
     <Content Include="modules\_protected\EPiServer.ContentDeliveryApi\ContentApiUserSettings.ascx" />
+    <Content Include="my-pages-app\e2e\protractor.conf.js" />
+    <Content Include="my-pages-app\src\app\app.component.css" />
+    <Content Include="my-pages-app\src\app\app.component.html" />
+    <Content Include="my-pages-app\src\favicon.ico" />
+    <Content Include="my-pages-app\src\index.html" />
+    <Content Include="my-pages-app\src\karma.conf.js" />
+    <Content Include="my-pages-app\src\styles.css" />
     <Content Include="Resources\LanguageFiles\ContentTypeNames.xml" />
     <Content Include="Resources\LanguageFiles\Display.xml" />
     <Content Include="Resources\LanguageFiles\EditorHints.xml" />
@@ -496,6 +517,20 @@
     <Content Include="modules\_protected\CMS\CMS.zip" />
     <Content Include="module.config" />
     <Content Include="modules\_protected\EPiServer.ContentDeliveryApi\module.config" />
+    <Content Include="my-pages-app\src\assets\.gitkeep" />
+    <Content Include="my-pages-app\src\browserslist" />
+    <Content Include="my-pages-app\src\tsconfig.app.json" />
+    <Content Include="my-pages-app\src\tsconfig.spec.json" />
+    <Content Include="my-pages-app\src\tslint.json" />
+    <Content Include="my-pages-app\.editorconfig" />
+    <Content Include="my-pages-app\.gitignore" />
+    <Content Include="my-pages-app\angular.json" />
+    <Content Include="my-pages-app\package-lock.json" />
+    <Content Include="my-pages-app\package.json" />
+    <Content Include="my-pages-app\README.md" />
+    <Content Include="my-pages-app\tsconfig.json" />
+    <Content Include="my-pages-app\tslint.json" />
+    <Content Include="my-pages-app\e2e\tsconfig.e2e.json" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\FindTemplateHint.cshtml" />
     <Content Include="Views\FindSearchPage\Index.cshtml" />
@@ -543,6 +578,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
